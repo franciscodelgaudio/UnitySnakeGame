@@ -7,6 +7,7 @@ public class GameOver : MonoBehaviour
     public GameObject snakeHead;
     public GameObject canvas;
     private SnakeMove snakeMove;
+    private GrowSnake growSnake;
 
     void Start (){
         canvas.SetActive(false);
@@ -14,6 +15,12 @@ public class GameOver : MonoBehaviour
     
     void Update (){
         snakeMove = snakeHead.GetComponent<SnakeMove>();
+        growSnake = snakeHead.GetComponent<GrowSnake>();
+        for (int i = 1 ; i < growSnake.newSnakeTailClone.Count ; i++){
+            if (snakeHead.transform.position == growSnake.newSnakeTailClone[i].transform.position){
+                gameOver();
+            }
+        }
         if (snakeMove.limite){
             gameOver();
         }

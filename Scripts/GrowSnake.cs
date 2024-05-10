@@ -17,10 +17,16 @@ public class GrowSnake : MonoBehaviour
     private bool start = false;
 
     void Update (){
+        int i = 0;
         spawnApple = snakeHead.GetComponent<SpawnApple>();
-        if(spawnApple.comeuMaca){
+        if(spawnApple.comeuMaca && newSnakeTailClone.Count == 0){
             newSnakeTailClone.Add(Instantiate(snakeTail, snakeHead.transform.position, Quaternion.identity));
             start = true;
+        }
+        else if (spawnApple.comeuMaca){
+            newSnakeTailClone.Add(Instantiate(snakeTail, newSnakeTailClone[i].transform.position, Quaternion.identity));
+            start = true;
+            i++;
         }
         if (start){MoveClone();}
     }
